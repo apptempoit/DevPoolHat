@@ -31,9 +31,6 @@ namespace DevPool
                 var memberGroup4 = (List<String>)Session["memberGroup4"];
 
 
-
-
-
                 // เช็คว่าแต่ละกลุ่มเต็มหรือยัง
                 string Group1IsMax = "";
                 Session["Group1IsMax"] = Group1IsMax;
@@ -47,39 +44,16 @@ namespace DevPool
                 Session["GroupAllIsMax"] = GroupAllIsMax;
 
 
-
-
-
             }
             else
             {
-
 
 
                 LabelError.Text = "";
                 try
                 {
 
-
-                    // 4 Group
-                    /*
-                     LabelGroup1  ก็อดดริก กริฟฟินดอร์
-                       LabelGroup2 เฮลก้า ฮัฟเฟิลพัฟ
-                        LabelGroup3 โรวีน่า เรเวนคลอ
-
-                      LabelGroup4  ซัลลาซาร์ สลีธีริน
-
-                        LabelTotal 
-                    */
-
-                    // LabelShow.Text = setPrepareName[0];
-
-
-
-
-
-                    //countall() นับจำนวนทั้งหมด เพื่อแสดง
-
+                    //นับจำนวน
                     countall();
                 }
                 catch (Exception ex)
@@ -91,12 +65,8 @@ namespace DevPool
             }//end postback
 
 
-
             countall();
         } // end load
-
-
-
 
 
         //สุ่มชื่อ
@@ -134,9 +104,6 @@ namespace DevPool
             TextBoxName.Text = setPrepareName[i];
 
 
-
-
-
         }//end สุ่มชื่อ
 
 
@@ -144,30 +111,23 @@ namespace DevPool
         protected void ButtonRun_Click(object sender, EventArgs e)
         {
             LabelError.Text = "";
-            if (TextBoxName.Text == "")
+            if (TextBoxName.Text == "") // เช็คว่ากรอกชื่อหรือยัง
             {
                 LabelError.Text = "กรูณากรอกชื่อ นามสกุล หากคิดไม่ออก กดปุ่มสุ่มชื่อได้เลย";
             }
             else
             {
 
-
-
-                //test
-
                 int countAll = 0;
 
 
                 //เช็คแต่ละกลุ่มว่าเต็มยัง ถ้าเต็ม set ismax = 1
-
-
                 var memberGroup1 = (List<String>)Session["memberGroup1"];
                 var memberGroup2 = (List<String>)Session["memberGroup2"];
                 var memberGroup3 = (List<String>)Session["memberGroup3"];
                 var memberGroup4 = (List<String>)Session["memberGroup4"];
 
-
-
+                //PrepareData
 
                 LabelShow.Text = "";
                 int countGroup1 = 0;
@@ -221,8 +181,7 @@ namespace DevPool
                 }
 
 
-
-
+                // เช็คว่าแต่ละกลุ่มคน 13 คนหรือยัง
 
                 if (countGroup1 > 12)
                 {
@@ -253,20 +212,6 @@ namespace DevPool
 
 
 
-
-
-
-
-
-                //  คราวนี้ เช็คว่า  แต่ละกลุ่ม ครบ 13 หรือยัง    ถ้าเกินแล้ว  ให้ไปกลุ่มอื่น
-
-
-
-
-
-
-
-
                 //เช็คว่าครบ 50 หรือยัง
                 if (countAll > 49)
                 {
@@ -274,8 +219,7 @@ namespace DevPool
                 }
 
 
-
-
+                //  คราวนี้ เช็คว่า  แต่ละกลุ่ม ครบ 13 หรือยัง    ถ้าเกินแล้ว  ให้ไปกลุ่มอื่น
 
                 if (Session["GroupAllIsMax"].ToString() == "1")
                 {
@@ -284,28 +228,22 @@ namespace DevPool
                 else
                 {
 
-
                     if ((result == 1) && (Session["Group1IsMax"].ToString() == "1"))
                     {
-
                         //ย้ายไปกลุ่ม 2
                         result = 2;
 
                     }
-
-
 
                     if ((result == 2) && (Session["Group2IsMax"].ToString() == "1"))
                     {
 
                         //ย้ายไปกลุ่ม 3
                         result = 3;
-
                     }
 
                     if ((result == 3) && (Session["Group3IsMax"].ToString() == "1"))
                     {
-
                         //ย้ายไปกลุ่ม 4
                         result = 4;
 
@@ -313,10 +251,8 @@ namespace DevPool
 
                     if ((result == 4) && (Session["Group4IsMax"].ToString() == "1"))
                     {
-
                         //ย้ายไปกลุ่ม 1
                         result = 1;
-
                     }
 
 
@@ -324,7 +260,7 @@ namespace DevPool
                     try
                     {
 
-
+                        // ได้กลุ่มแล้ว ก็ทำการแอดเข้าแต่ละกลุ่ม พร้อมแสดงผล
                         if (result == 1)
                         {
                             addgroup1(TextBoxName.Text);
@@ -344,14 +280,6 @@ namespace DevPool
                         {
                             addgroup4(TextBoxName.Text);
                         }
-
-
-
-
-
-
-
-
 
 
                     }//end try
@@ -375,7 +303,6 @@ namespace DevPool
         //add group1
         public void addgroup1(string name)
         {
-
 
             List<string> memberGroup1 = new List<string>();
             if (Session["memberGroup1"] != null)
@@ -447,9 +374,7 @@ namespace DevPool
         public void countall()
         {
 
-
-
-
+            // Prepare Data
             var memberGroup1 = (List<String>)Session["memberGroup1"];
             var memberGroup2 = (List<String>)Session["memberGroup2"];
             var memberGroup3 = (List<String>)Session["memberGroup3"];
@@ -516,6 +441,8 @@ namespace DevPool
             Label2.Text = "";
             Label3.Text = "";
             Label4.Text = "";
+
+            // วน แสดงชื่อคนในแต่ละกลุ่ม
             for (int i = 0; i < countGroup1; i++)
             {
                 Label1.Text += memberGroup1[i];
@@ -537,7 +464,129 @@ namespace DevPool
                 Label4.Text += "<br />";
             }
 
+
+            DivChart();
         }//endd count all
+
+
+
+
+
+        public void DivChart()
+        {
+
+
+            try
+            {
+
+                var memberGroup1 = (List<String>)Session["memberGroup1"];
+                var memberGroup2 = (List<String>)Session["memberGroup2"];
+                var memberGroup3 = (List<String>)Session["memberGroup3"];
+                var memberGroup4 = (List<String>)Session["memberGroup4"];
+
+                int countGroup1 = 0;
+                int countGroup2 = 0;
+                int countGroup3 = 0;
+                int countGroup4 = 0;
+                int countAll = 0;
+                try
+                {
+                    countGroup1 = memberGroup1.Count();
+                }
+                catch
+                {
+                    countGroup1 = 0;
+                }
+
+                try
+                {
+                    countGroup2 = memberGroup2.Count();
+                }
+                catch
+                {
+                    countGroup2 = 0;
+                }
+
+                try
+                {
+                    countGroup3 = memberGroup3.Count();
+                }
+                catch
+                {
+                    countGroup3 = 0;
+                }
+
+                try
+                {
+                    countGroup4 = memberGroup4.Count();
+                }
+                catch
+                {
+                    countGroup4 = 0;
+                }
+
+
+
+                String chart = "";
+                // You can change your chart height by modify height value
+                chart = "<canvas id=\"gauge\" width =\"100%\" height=\"40\"></canvas>";
+                chart += "<script>";
+                chart += "new Chart(document.getElementById(\"gauge\"), {type: 'bar'";
+                chart += ", data:{  labels:[";
+                chart += "'กริฟฟินดอร์','ฮัฟเฟิลพัฟ','เรเวนคลอ','สลีธีริน'";
+                chart += "],datasets: [{ data: [";
+
+                chart += "'" + countGroup1 + "',' " + countGroup2 + "','" + countGroup3 + "','" + countGroup4 + "'";
+                //   chart += value2;
+
+
+                chart += "],";
+                chart += "backgroundColor:['rgba(128, 0, 128, 0.8)','rgba(124, 252, 0, 0.8)','rgba(255, 0, 0, 0.8)','rgba(124, 252, 0, 0.2)','rgba(125, 125, 80, 0.2)','rgba(25, 79, 32, 0.2)','rgba(255, 99, 132, 0.2)','rgba(255, 149, 64, 0.2)', 'rgba(255, 205, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(54, 162, 235, 0.2)','rgba(153, 102, 255, 0.2)','rgba(201, 203, 207, 0.2)'],";
+                chart += "borderColor:[ 'rgb(128, 0, 128)','rgb(124, 252, 0)','rgb(255, 0, 0)','rgb(124, 252, 0)','rgb(125, 125, 80)','rgb(25, 79, 32)','rgb(255, 99, 132)','rgb(255, 149, 64)', 'rgb(255, 205, 86)','rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)','rgb(201, 203, 207)'],";
+
+
+                chart += "borderWidth: 1,";
+                chart += "label: \"จำนวนคนแต่ละกลุ่ม\"}"; // Chart color
+
+                // start
+
+                /*
+                    chart += ",{ data: [";
+                //   chart += value1;
+
+                chart += "'100','200'";
+                chart += "],";
+                    chart += "backgroundColor:['rgba(155, 99, 152, 0.2)','rgba(155, 199, 132, 0.2)','rgba(215, 99, 232, 0.2)','rgba(185, 129, 132, 0.2)','rgba(125, 125, 80, 0.2)','rgba(25, 79, 32, 0.2)','rgba(255, 99, 132, 0.2)','rgba(255, 149, 64, 0.2)', 'rgba(255, 205, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(54, 162, 235, 0.2)','rgba(153, 102, 255, 0.2)','rgba(201, 203, 207, 0.2)'],";
+                    chart += "borderColor:[ 'rgb(155, 99, 152)','rgb(155, 199, 132)','rgb(215, 99, 232)','rgb(180, 129, 132)','rgb(125, 125, 80)','rgb(25, 79, 32)','rgb(255, 99, 132)','rgb(255, 149, 64)', 'rgb(255, 205, 86)','rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)','rgb(201, 203, 207)'],";
+                    chart += "borderWidth: 1,";
+                    chart += "label: \"ค่าใช้จ่ายตามเกณฑ์(ล้านบาท)\",borderColor: \"#3e95cd\",fill: true}"; // Chart color
+                    //   chart += "]},options: { title: { display: true,text: 'Dashboard'}}"; // Chart title
+                  
+                */
+                chart += "]"; // Chart title
+
+
+                // end
+                chart += "}"; // Chart title
+                chart += "});";
+                chart += "</script>";
+
+                ltChart.Text = chart;
+
+
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                string golf = ex.Message;
+            }
+        }
+
+
 
 
 
