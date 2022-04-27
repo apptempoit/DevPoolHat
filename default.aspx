@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2018.css">
 </head>
 
+      <script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+  <script src="https://unpkg.com/chartjs-gauge@0.3.0/dist/chartjs-gauge.js"></script>
+
    <style>
 
     body, html {
@@ -77,7 +80,7 @@
 
 
 
-                          <div class="w3-half w3-light-green w3-container">แสดงชื่อแต่ละบ้าน
+                          <div class="w3-half  w3-container">แสดงชื่อแต่ละบ้าน
 
 
 
@@ -133,7 +136,7 @@
 
                             </table>
 
-
+                                     <asp:Literal ID="ltChart" runat="server"></asp:Literal>
 
                         </div>
                         
